@@ -5,12 +5,14 @@ import com.example.demo.model.SubscriptionRequest;
 import com.example.demo.model.TopicNotification;
 import com.example.demo.service.FCMService;
 import com.google.firebase.messaging.FirebaseMessagingException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Slf4j
 public class NotificationController {
     public final FCMService fcmService;
 
@@ -21,6 +23,7 @@ public class NotificationController {
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/notification")
     public void sendTargetedNotification(@RequestBody DirectNotification notification) {
+        log.info("okkk");
         fcmService.sendNotificationToTarget(notification);
     }
 
@@ -30,9 +33,9 @@ public class NotificationController {
         fcmService.sendNotificationToTopic(notification);
     }
 
-//    @PostMapping("/topic/subscription")
-//    public void subscribeToTopic(@RequestBody SubscriptionRequest subscription) throws FirebaseMessagingException {
-//        fcmService.subscribeToTopic(subscription);
-//    }
+    @PostMapping("/topic/subscription")
+    public void subscribeToTopic(@RequestBody SubscriptionRequest subscription) throws FirebaseMessagingException {
+        fcmService.subscribeToTopic(subscription);
+    }
 
 }

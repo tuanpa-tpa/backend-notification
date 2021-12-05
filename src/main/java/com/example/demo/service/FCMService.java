@@ -4,11 +4,14 @@ import com.example.demo.model.DirectNotification;
 import com.example.demo.model.SubscriptionRequest;
 import com.example.demo.model.TopicNotification;
 import com.google.firebase.messaging.*;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 public class FCMService {
 //    public String sendNotificationToTarget(DirectNotification notification) {
 //        Message message = Message.builder()
@@ -30,13 +33,14 @@ public class FCMService {
                         .setNotification(WebpushNotification.builder()
                                         .setTitle(notification.getTitle())
                                         .setBody(notification.getMessage())
-//                                        .setIcon("https://assets.mapquestapi.com/icon/v2/circle@2x.png")
+                                        .setIcon("https://assets.mapquestapi.com/icon/v2/circle@2x.png")
                                         .build()
                         ).build()
                 )
                 .setToken(notification.getTarget())
                 .build();
         FirebaseMessaging.getInstance().sendAsync(message);
+        log.info("okk");
     }
 
     public void sendNotificationToTopic(TopicNotification notification) {
