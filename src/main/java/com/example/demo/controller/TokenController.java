@@ -21,5 +21,6 @@ public class TokenController {
     public void getTokenClient(@RequestBody TokenClient tokenClient) {
         fcmService.getTk(tokenClient);
     }
+
 }
 

@@ -29,7 +29,6 @@ public class NotificationController {
         fcmService.sendNotificationToTarget(notification);
     }
 
-
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/topic/notification")
     public void sendNotificationToTopic(@RequestBody TopicNotification notification) {
