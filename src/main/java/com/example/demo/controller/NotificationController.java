@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.ExecutionException;
+
 @RestController
 @Slf4j
 public class NotificationController {
@@ -22,10 +24,11 @@ public class NotificationController {
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/notification")
-    public void sendTargetedNotification(@RequestBody DirectNotification notification) {
+    public void sendTargetedNotification(@RequestBody DirectNotification notification) throws ExecutionException, InterruptedException {
         log.info("okkk");
         fcmService.sendNotificationToTarget(notification);
     }
+
 
     @CrossOrigin(origins = "http://localhost:4200")
     @PostMapping("/topic/notification")
